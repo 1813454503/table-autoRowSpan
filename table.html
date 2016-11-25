@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border: 1px solid red;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tbody>
+    <tr>
+        <td>111</td>
+        <td>111</td>
+        <td>111</td>
+    </tr>
+
+    <tr>
+        <td>111</td>
+        <td>222</td>
+        <td>222</td>
+    </tr>
+
+    <tr>
+        <td>333</td>
+        <td>333</td>
+        <td>333</td>
+    </tr>
+    </tbody>
+    <script>
+        //自动合并竖排单元格
+        function autoRowSpan(tb, row, col) {
+            var lastValue = "";
+            var value = "";
+            var pos = 1;
+            for (var i = row; i < tb.rows.length; i++) {
+                value = tb.rows[i].cells[col].innerText;
+                if (lastValue == value) {
+                    tb.rows[i].deleteCell(col);
+                    tb.rows[i - pos].cells[col].rowSpan = tb.rows[i - pos].cells[col].rowSpan + 1;
+                    pos++;
+                } else {
+                    lastValue = value;
+                    pos = 1;
+                }
+            }
+        }
+        var oTb=document.getElementsByTagName('table')[0];
+        autoRowSpan(oTb,0,0);
+    </script>
+</table>
+</body>
+</html>
